@@ -1,0 +1,29 @@
+doctype html
+html lang="en"
+  head
+    meta charset="utf-8"
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    = csrf_meta_tags
+    = csp_meta_tag
+    link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"
+    = stylesheet_link_tag "tailwind", "data-turbo-track": "reload"
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_importmap_tags
+    title StockVal
+
+  body class="bg-[#0a0a0a] text-[#f5f5f5] font-sans antialiased min-h-screen"
+    nav class="border-b border-[#222] px-6 py-4"
+      .max-w-6xl.mx-auto.flex.items-center.justify-between
+        = link_to root_path, class: "text-lg font-semibold tracking-tight" do
+          span class="text-[#00d4aa]" StockVal
+        - if authenticated?
+          .flex.items-center.gap-6
+            span class="text-sm text-[#666]" = Current.user.email_address
+            = button_to "Sign out", session_path, method: :delete, class: "text-sm text-[#666] hover:text-[#f5f5f5] transition-colors cursor-pointer bg-transparent border-0"
+
+    main class="max-w-6xl mx-auto px-6 py-10"
+      = yield
+
+    footer class="border-t border-[#222] px-6 py-6 mt-20"
+      .max-w-6xl.mx-auto
+        p class="text-xs text-[#444] text-center" Not financial advice. For educational purposes only.

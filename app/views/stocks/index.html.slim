@@ -1,0 +1,9 @@
+.text-center.py-20
+  h1 class="text-4xl font-semibold tracking-tight mb-3"
+    | Value any stock
+  p class="text-[#666] text-lg mb-10"
+    | Fundamental analysis. No noise.
+
+  = form_with url: stocks_search_path, method: :get, class: "flex gap-3 justify-center" do |f|
+    = f.text_field :ticker, placeholder: "Enter ticker e.g. AAPL", autofocus: true, class: "w-72"
+    = f.submit "Analyse", class: "!bg-[#00d4aa] !text-[#0a0a0a] font-semibold px-6 py-2.5 rounded-lg cursor-pointer hover:opacity-85 transition-opacity"
