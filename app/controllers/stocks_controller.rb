@@ -18,31 +18,31 @@ class StocksController < ApplicationController
 private
 
   def build_fundamentals(stock)
-    raw = stock.raw_data
+    stock_data = stock.raw_data
     [
-      ["Market Cap", number_to_human(raw["MarketCapitalization"].to_i, units: { billion: "B", million: "M", thousand: "K" })],
-      ["Revenue (TTM)", number_to_human(raw["RevenueTTM"].to_i, units: { billion: "B", million: "M" })],
-      ["Gross Profit (TTM)", number_to_human(raw["GrossProfitTTM"].to_i, units: { billion: "B", million: "M" })],
-      ["EBITDA", number_to_human(raw["EBITDA"].to_i, units: { billion: "B", million: "M" })],
-      ["Forward P/E", raw["ForwardPE"]],
-      ["PEG Ratio", raw["PEGRatio"]],
-      ["Price to Sales", raw["PriceToSalesRatioTTM"]],
-      ["Beta", raw["Beta"]],
-      ["52W High", "$#{raw["52WeekHigh"]}"],
-      ["52W Low", "$#{raw["52WeekLow"]}"],
-      ["Dividend Yield", "#{(raw["DividendYield"].to_f * 100).round(2)}%"],
-      ["Shares Outstanding", number_to_human(raw["SharesOutstanding"].to_i, units: { billion: "B", million: "M" })]
+      ["Market Cap", number_to_human(stock_data["MarketCapitalization"].to_i, units: { billion: "B", million: "M", thousand: "K" })],
+      ["Revenue (TTM)", number_to_human(stock_data["RevenueTTM"].to_i, units: { billion: "B", million: "M" })],
+      ["Gross Profit (TTM)", number_to_human(stock_data["GrossProfitTTM"].to_i, units: { billion: "B", million: "M" })],
+      ["EBITDA", number_to_human(stock_data["EBITDA"].to_i, units: { billion: "B", million: "M" })],
+      ["Forward P/E", stock_data["ForwardPE"]],
+      ["PEG Ratio", stock_data["PEGRatio"]],
+      ["Price to Sales", stock_data["PriceToSalesRatioTTM"]],
+      ["Beta", stock_data["Beta"]],
+      ["52W High", "$#{stock_data["52WeekHigh"]}"],
+      ["52W Low", "$#{stock_data["52WeekLow"]}"],
+      ["Dividend Yield", "#{(stock_data["DividendYield"].to_f * 100).round(2)}%"],
+      ["Shares Outstanding", number_to_human(stock_data["SharesOutstanding"].to_i, units: { billion: "B", million: "M" })]
     ]
   end
 
   def build_analyst_ratings(stock)
-    raw = stock.raw_data
+    stock_data = stock.raw_data
     [
-      ["Strong Buy", raw["AnalystRatingStrongBuy"], "#00c076"],
-      ["Buy", raw["AnalystRatingBuy"], "#00d4aa"],
-      ["Hold", raw["AnalystRatingHold"], "#666"],
-      ["Sell", raw["AnalystRatingSell"], "#ff4d4d"],
-      ["Strong Sell", raw["AnalystRatingStrongSell"], "#ff4d4d"]
+      ["Strong Buy", stock_data["AnalystRatingStrongBuy"], "#00c076"],
+      ["Buy", stock_data["AnalystRatingBuy"], "#00d4aa"],
+      ["Hold", stock_data["AnalystRatingHold"], "#666"],
+      ["Sell", stock_data["AnalystRatingSell"], "#ff4d4d"],
+      ["Strong Sell", stock_data["AnalystRatingStrongSell"], "#ff4d4d"]
     ]
   end
 end

@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "home#index"
+  # root "home#index"
+  root "stocks#index"
   get "stocks/search", to: "stocks#search"
   resources :stocks, only: %i[index show], param: :ticker
   

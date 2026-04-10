@@ -12,14 +12,34 @@ html lang="en"
     title StockVal
 
   body class="bg-[#0a0a0a] text-[#f5f5f5] font-sans antialiased min-h-screen"
-    nav class="border-b border-[#222] px-6 py-4"
-      .max-w-6xl.mx-auto.flex.items-center.justify-between
-        = link_to root_path, class: "text-lg font-semibold tracking-tight" do
-          span class="text-[#00d4aa]" StockVal
+    nav class="border-b border-[#222] px-6 py-0"
+      .max-w-6xl.mx-auto.flex.items-center.justify-between style="height: 56px"
+
+        .flex.items-center style="gap: 2rem"
+          = link_to root_path, class: "text-base font-semibold tracking-tight" do
+            span class="text-[#00d4aa]" StockVal
+          - if authenticated?
+            = link_to "Watchlist", "#", class: "nav-link"
+            = link_to "Explore", stocks_path, class: "nav-link"
+
         - if authenticated?
-          .flex.items-center.gap-6
-            span class="text-sm text-[#666]" = Current.user.email_address
-            = button_to "Sign out", session_path, method: :delete, class: "text-sm text-[#666] hover:text-[#f5f5f5] transition-colors cursor-pointer bg-transparent border-0"
+          = form_with url: stocks_search_path, method: :get do |f|
+            = f.text_field :ticker, placeholder: "Search ticker...", class: "nav-search"
+
+        - if authenticated?
+          .flex.items-center style="gap: 0.75rem"
+            .nav-avatar = Current.user.email_address
+        
+            .w-px.h-4.bg-[#222]
+            = button_to "Sign out", session_path, method: :delete, class: "nav-signout"
+        - else
+          = link_to "Sign in", new_session_path, class: "text-sm text-[#00d4aa]"
+
+
+
+
+
+
 
     main class="max-w-6xl mx-auto px-6 py-10"
       = yield

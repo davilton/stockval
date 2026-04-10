@@ -36,6 +36,8 @@
 / / Footer meta
 / p class="text-xs text-[#444]" = "Last updated #{@stock.last_fetched_at.strftime('%b %d, %Y at %H:%M')}"
 
+
+
 / Back link
 .mb-6
   = link_to "← Search another stock", stocks_path, class: "text-sm text-[#666] hover:text-[#00d4aa] transition-colors"
@@ -79,19 +81,23 @@
           span class="text-xs text-[#666] w-6 text-right" = "#{score}/2"
 
   / Fundamentals
-.rounded-xl.overflow-hidden class="bg-[#111] border border-[#222]"
-  .px-6.py-4 class="border-b border-[#222]"
-    h2 class="text-sm font-semibold uppercase tracking-widest text-[#666]" Fundamentals
-  - @fundamentals.each do |label, value|
-    .flex.items-center.justify-between.px-6.py-4 class="border-b border-[#222] last:border-0"
-      p class="text-sm text-[#666]" = label
-      p class="text-sm font-medium tabular" = value
+  .rounded-xl.overflow-hidden class="bg-[#111] border border-[#222]"
+    .px-6.py-4 class="border-b border-[#222]"
+      h2 class="text-sm font-semibold uppercase tracking-widest text-[#666]" Fundamentals
+    - @fundamentals.each do |label, value|
+      .flex.items-center.justify-between.px-6.py-4 class="border-b border-[#222] last:border-0"
+        p class="text-sm text-[#666]" = label
+        p class="text-sm font-medium tabular" = value
 
 / Analyst ratings
-- @analyst_ratings.each do |label, count, color|
-  .text-center
-    p class="text-2xl font-semibold tabular" style="color: #{color}" = count
-    p class="text-xs text-[#666] mt-1" = label
+.rounded-xl.overflow-hidden.mb-8 class="bg-[#111] border border-[#222]"
+  .px-6.py-4 class="border-b border-[#222]"
+    h2 class="text-sm font-semibold uppercase tracking-widest text-[#666]" Analyst Ratings
+  .grid.px-6.py-6 style="grid-template-columns: repeat(5, 1fr)"
+    - @analyst_ratings.each do |label, count, color|
+      .text-center
+        p class="text-2xl font-semibold tabular" style="color: #{color}" = count
+        p class="text-xs text-[#666] mt-1" = label
 
 / Footer meta
 .flex.items-center.justify-between
